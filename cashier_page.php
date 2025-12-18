@@ -10,11 +10,9 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-// Get drinks (ONLY AVAILABLE)
 $sqlDrinks="SELECT * FROM MENU_ITEMS WHERE CATEGORY='DRINKS' AND IS_AVAILABLE=1 ORDER BY ITEM_NAME";
 $resultDrinks=sqlsrv_query($conn,$sqlDrinks);
 
-// Get food (ONLY AVAILABLE)
 $sqlFood="SELECT * FROM MENU_ITEMS WHERE CATEGORY='FOOD' AND IS_AVAILABLE=1 ORDER BY ITEM_NAME";
 $resultFood=sqlsrv_query($conn,$sqlFood);
 ?>
@@ -188,23 +186,23 @@ $resultFood=sqlsrv_query($conn,$sqlFood);
 
                         <div id="cartItems"></div>
 
-<div class="discount-section">
-    <label><b>Discount:</b></label><br>
-    <input type="radio" name="discount" value="0" checked onchange="calcTotal()">
-    <label>No Discount</label><br>
-    <input type="radio" name="discount" value="20" onchange="calcTotal()">
-    <label>Senior Citizen (20% OFF)</label>
-</div>
+                        <div class="discount-section">
+                            <label><b>Discount:</b></label><br>
+                            <input type="radio" name="discount" value="0" checked onchange="calcTotal()">
+                            <label>No Discount</label><br>
+                            <input type="radio" name="discount" value="20" onchange="calcTotal()">
+                            <label>Senior Citizen (20% OFF)</label>
+                        </div>
 
-<div class="discount-section">
-    <label><b>Payment Method:</b></label><br>
-    <input type="radio" name="payment" value="Cash" checked required>
-    <label>Cash</label><br>
-    <input type="radio" name="payment" value="GCash" required>
-    <label>GCash</label><br>
-    <input type="radio" name="payment" value="Card" required>
-    <label>Card</label>
-</div>
+                        <div class="discount-section">
+                            <label><b>Payment Method:</b></label><br>
+                            <input type="radio" name="payment" value="Cash" checked required>
+                            <label>Cash</label><br>
+                            <input type="radio" name="payment" value="GCash" required>
+                            <label>GCash</label><br>
+                            <input type="radio" name="payment" value="Card" required>
+                            <label>Card</label>
+                        </div>
 
                         <div class="total-section">
                             <h4>Subtotal: P<span id="sub">0.00</span></h4>

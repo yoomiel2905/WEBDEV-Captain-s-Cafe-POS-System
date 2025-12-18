@@ -10,14 +10,12 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-$orderid=$_GET['id'];
+$orderid=$_POST['orderid'];
 
-// Get order details
 $sql="SELECT * FROM ORDERS WHERE ORDERID='$orderid'";
 $result=sqlsrv_query($conn,$sql);
 $order=sqlsrv_fetch_array($result);
 
-// Get order items
 $sql2="SELECT * FROM ORDER_ITEMS WHERE ORDERID='$orderid'";
 $result2=sqlsrv_query($conn,$sql2);
 ?>

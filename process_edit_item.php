@@ -17,9 +17,7 @@ $price=$_POST['price'];
 $availability=$_POST['availability'];
 $oldimage=$_POST['oldimage'];
 
-// Check if new image is uploaded
 if($_FILES['itemimage']['name'] != ''){
-    // New image uploaded
     $destination="uploads/";
     $filename=basename($_FILES['itemimage']['name']);
     $finalpath=$destination.$filename;
@@ -39,7 +37,6 @@ if($_FILES['itemimage']['name'] != ''){
         $imagepath=$oldimage;
     }
 }else{
-    // No new image, keep old one
     $imagepath=$oldimage;
 }
 

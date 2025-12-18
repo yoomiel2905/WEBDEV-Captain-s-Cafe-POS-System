@@ -14,7 +14,6 @@ $itemname=$_POST['itemname'];
 $category=$_POST['category'];
 $price=$_POST['price'];
 
-// File upload
 $destination="uploads/";
 $filename=basename($_FILES['itemimage']['name']);
 $finalpath=$destination.$filename;

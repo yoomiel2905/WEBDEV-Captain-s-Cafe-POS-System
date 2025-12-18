@@ -10,8 +10,8 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-$orderid=$_GET['orderid'];
-$usertype=$_GET['usertype']; // NEW
+$orderid=$_POST['orderid'];
+$usertype=$_POST['usertype'];
 
 $sql="SELECT * FROM ORDERS WHERE ORDERID='$orderid'";
 $result=sqlsrv_query($conn,$sql);
@@ -20,7 +20,6 @@ $order=sqlsrv_fetch_array($result);
 $sql2="SELECT * FROM ORDER_ITEMS WHERE ORDERID='$orderid'";
 $result2=sqlsrv_query($conn,$sql2);
 
-// Determine which page to redirect to
 if($usertype == 'cashier'){
     $backPage = 'cashier_page.php';
 }else{
@@ -109,3 +108,7 @@ if($usertype == 'cashier'){
     </script>
 </body>
 </html>
+
+<?php
+sqlsrv_close($conn);
+?>

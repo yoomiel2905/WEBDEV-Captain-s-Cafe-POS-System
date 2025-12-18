@@ -44,7 +44,19 @@ if($result){
         sqlsrv_query($conn,$sql3);
     }
     
-    header("Location: receipt.php?orderid=$orderid&usertype=$usertype");
-    exit();
+    sqlsrv_close($conn);
+    ?>
+    <html>
+    <body>
+        <form id="redirectForm" action="receipt.php" method="POST">
+            <input type="hidden" name="orderid" value="<?php echo $orderid; ?>">
+            <input type="hidden" name="usertype" value="<?php echo $usertype; ?>">
+        </form>
+        <script>
+            document.getElementById('redirectForm').submit();
+        </script>
+    </body>
+    </html>
+    <?php
 }
 ?>

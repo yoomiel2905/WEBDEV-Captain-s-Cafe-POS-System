@@ -10,7 +10,6 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-// Get all menu items
 $sql="SELECT * FROM MENU_ITEMS ORDER BY CATEGORY, ITEM_NAME";
 $result=sqlsrv_query($conn,$sql);
 ?>
@@ -137,7 +136,6 @@ $result=sqlsrv_query($conn,$sql);
                         echo '</td>';
                         echo '<td>';
                         
-                        // Toggle availability form
                         echo '<form action="toggle_availability.php" method="POST" style="display:inline;">';
                         echo '<input type="hidden" name="itemid" value="'.$row['ITEMID'].'">';
                         if($row['IS_AVAILABLE']==1){
@@ -149,13 +147,11 @@ $result=sqlsrv_query($conn,$sql);
                         }
                         echo '</form>';
                         
-                        // Edit form
                         echo '<form action="edit_menu_item.php" method="POST" style="display:inline;">';
                         echo '<input type="hidden" name="id" value="'.$row['ITEMID'].'">';
                         echo '<button type="submit" class="btn btn-sm btn-edit">Edit</button> ';
                         echo '</form>';
                         
-                        // Delete form
                         echo '<form action="delete_menu_item.php" method="POST" style="display:inline;" onsubmit="return confirm(\'Delete this item?\')">';
                         echo '<input type="hidden" name="id" value="'.$row['ITEMID'].'">';
                         echo '<button type="submit" class="btn btn-sm btn-delete">Delete</button>';

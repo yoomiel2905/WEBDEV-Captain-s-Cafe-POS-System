@@ -10,45 +10,36 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-// TODAY'S STATS
-// Total Sales Today
 $sql1="SELECT SUM(TOTAL_AMOUNT) AS TOTAL FROM ORDERS WHERE CONVERT(DATE, ORDER_DATE) = CONVERT(DATE, GETDATE())";
 $result1=sqlsrv_query($conn,$sql1);
 $row1=sqlsrv_fetch_array($result1);
 $totalSales = $row1['TOTAL'] ? number_format($row1['TOTAL'], 2) : '0.00';
 
-// Total Orders Today
 $sql2="SELECT COUNT(ORDERID) AS TOTAL FROM ORDERS WHERE CONVERT(DATE, ORDER_DATE) = CONVERT(DATE, GETDATE())";
 $result2=sqlsrv_query($conn,$sql2);
 $row2=sqlsrv_fetch_array($result2);
 $totalOrders = $row2['TOTAL'] ? $row2['TOTAL'] : 0;
 
-// Senior Discounts Today
 $sql3="SELECT COUNT(ORDERID) AS TOTAL FROM ORDERS WHERE CONVERT(DATE, ORDER_DATE) = CONVERT(DATE, GETDATE()) AND IS_SENIOR = 1";
 $result3=sqlsrv_query($conn,$sql3);
 $row3=sqlsrv_fetch_array($result3);
 $seniorDiscounts = $row3['TOTAL'] ? $row3['TOTAL'] : 0;
 
-// MONTHLY STATS
-// Total Sales This Month
 $sql4="SELECT SUM(TOTAL_AMOUNT) AS TOTAL FROM ORDERS WHERE MONTH(ORDER_DATE) = MONTH(GETDATE()) AND YEAR(ORDER_DATE) = YEAR(GETDATE())";
 $result4=sqlsrv_query($conn,$sql4);
 $row4=sqlsrv_fetch_array($result4);
 $monthlySales = $row4['TOTAL'] ? number_format($row4['TOTAL'], 2) : '0.00';
 
-// Total Orders This Month
 $sql5="SELECT COUNT(ORDERID) AS TOTAL FROM ORDERS WHERE MONTH(ORDER_DATE) = MONTH(GETDATE()) AND YEAR(ORDER_DATE) = YEAR(GETDATE())";
 $result5=sqlsrv_query($conn,$sql5);
 $row5=sqlsrv_fetch_array($result5);
 $monthlyOrders = $row5['TOTAL'] ? $row5['TOTAL'] : 0;
 
-// Senior Discounts This Month
 $sql6="SELECT COUNT(ORDERID) AS TOTAL FROM ORDERS WHERE MONTH(ORDER_DATE) = MONTH(GETDATE()) AND YEAR(ORDER_DATE) = YEAR(GETDATE()) AND IS_SENIOR = 1";
 $result6=sqlsrv_query($conn,$sql6);
 $row6=sqlsrv_fetch_array($result6);
 $monthlySeniorDiscounts = $row6['TOTAL'] ? $row6['TOTAL'] : 0;
 
-// current month name like december january etc
 $currentMonth = date('F Y');
 
 sqlsrv_close($conn);
@@ -145,7 +136,6 @@ sqlsrv_close($conn);
     </nav>
 
     <div class="container mt-5">
-        <!-- TODAY'S SUMMARY -->
         <h1 class="dashboard-title">Today's Summary</h1>
 
         <div class="row">
@@ -176,7 +166,6 @@ sqlsrv_close($conn);
 
         <div class="section-divider"></div>
 
-        <!-- MONTHLY SUMMARY -->
         <h1 class="dashboard-title">Monthly Summary (<?php echo $currentMonth; ?>)</h1>
 
         <div class="row">

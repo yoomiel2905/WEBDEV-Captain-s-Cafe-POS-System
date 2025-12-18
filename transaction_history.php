@@ -10,7 +10,6 @@ $conn=sqlsrv_connect($serverName, $connectionOptions);
 if($conn==false)
     die(print_r(sqlsrv_errors(),true));
 
-// Get all orders
 $sql="SELECT * FROM ORDERS ORDER BY ORDER_DATE DESC";
 $result=sqlsrv_query($conn,$sql);
 ?>
@@ -126,7 +125,10 @@ $result=sqlsrv_query($conn,$sql);
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo '<a href="view_order.php?id='.$order['ORDERID'].'" class="btn btn-sm btn-view">View Details</a>';
+                        echo '<form action="view_order.php" method="POST" style="display:inline;">';
+                        echo '<input type="hidden" name="orderid" value="'.$order['ORDERID'].'">';
+                        echo '<button type="submit" class="btn btn-sm btn-view">View Details</button>';
+                        echo '</form>';
                         echo '</td>';
                         echo '</tr>';
                     }
